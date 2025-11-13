@@ -106,7 +106,30 @@ python src/train.py --data configs/dataset.yaml --epochs 100 --batch 16
 ```bash
 python src/evaluate.py --weights models/best.pt --data configs/dataset.yaml
 ```
+# 1. Clone repository
+git clone https://github.com/Hamad-Ansari/Object-Detection-YOLOv8-Project.git
+cd Object-Detection-YOLOv8-Project
 
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run interactive quick start
+python quickstart.py
+
+# 4. Detect objects in image
+python src/detect.py --source data/images/sample.jpg --weights yolov8n.pt
+
+# 5. Real-time webcam detection
+python src/detect.py --source 0 --weights yolov8n.pt
+
+# 6. Train custom model
+python src/train.py --data configs/dataset.yaml --epochs 100 --batch 16
+
+# 7. Evaluate model
+python src/evaluate.py --weights models/best.pt --data configs/dataset.yaml
+
+# 8. Start API server
+python src/api.py --weights yolov8n.pt --port 5000
 ## Model Performance
 
 | Model | Size | mAP@0.5 | Speed (ms) |
