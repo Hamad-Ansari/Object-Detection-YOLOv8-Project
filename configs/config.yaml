@@ -1,0 +1,86 @@
+# Object Detection Configuration File
+
+# Model Configuration
+model:
+  architecture: yolov8n  # Options: yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
+  weights: yolov8n.pt    # Pre-trained weights or path to custom weights
+  task: detect           # Task type: detect, segment, classify
+
+# Training Configuration
+training:
+  epochs: 100
+  batch_size: 16
+  img_size: 640
+  patience: 50           # Early stopping patience
+  optimizer: AdamW
+  lr0: 0.01             # Initial learning rate
+  lrf: 0.01             # Final learning rate
+  momentum: 0.937
+  weight_decay: 0.0005
+  warmup_epochs: 3
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+  
+  # Data Augmentation
+  augmentation:
+    hsv_h: 0.015        # HSV-Hue augmentation
+    hsv_s: 0.7          # HSV-Saturation augmentation
+    hsv_v: 0.4          # HSV-Value augmentation
+    degrees: 0.0        # Rotation (+/- deg)
+    translate: 0.1      # Translation (+/- fraction)
+    scale: 0.5          # Scale (+/- gain)
+    shear: 0.0          # Shear (+/- deg)
+    perspective: 0.0    # Perspective (+/- fraction)
+    flipud: 0.0         # Flip up-down probability
+    fliplr: 0.5         # Flip left-right probability
+    mosaic: 1.0         # Mosaic augmentation probability
+    mixup: 0.0          # Mixup augmentation probability
+    copy_paste: 0.0     # Copy-paste augmentation probability
+
+# Inference Configuration
+inference:
+  conf_threshold: 0.25  # Confidence threshold
+  iou_threshold: 0.45   # IoU threshold for NMS
+  max_det: 300          # Maximum detections per image
+  agnostic_nms: false   # Class-agnostic NMS
+  
+# Evaluation Configuration
+evaluation:
+  conf_threshold: 0.001
+  iou_threshold: 0.6
+  save_json: true
+  save_hybrid: true
+  plots: true
+
+# Device Configuration
+device:
+  use_cuda: true        # Use CUDA if available
+  device_id: 0          # GPU device ID
+  workers: 8            # Number of dataloader workers
+  
+# Paths
+paths:
+  data_dir: ./data
+  output_dir: ./outputs
+  models_dir: ./models
+  logs_dir: ./logs
+  
+# Logging
+logging:
+  tensorboard: true
+  wandb: false
+  wandb_project: object-detection
+  save_period: 10       # Save checkpoint every N epochs
+  verbose: true
+
+# API Configuration
+api:
+  host: 0.0.0.0
+  port: 5000
+  max_file_size: 16777216  # 16MB in bytes
+  allowed_extensions:
+    - jpg
+    - jpeg
+    - png
+    - bmp
+    - tiff
